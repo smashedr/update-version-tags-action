@@ -125,6 +125,7 @@ const Tags = require('./tags')
             core.summary.addHeading('Update Version Tags', '1')
             core.summary.addRaw(`**${tag}** \`${sha}\``, true)
             core.summary.addList(results)
+            await core.summary.write()
         }
 
         core.info(`✅ \u001b[32;1mFinished Success`)
