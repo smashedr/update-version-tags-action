@@ -21,12 +21,21 @@ inputs:
   tags:
     description: "Extra Tags"
     required: false
+  target:
+    description: "Target Tag"
+    required: false
+  summary:
+    description: "Results Summary"
+    required: false
+    default: "true"
   token:
     description: "GitHub Token"
     required: false
     default: ${{ github.token }}
 
 outputs:
+  sha:
+    description: "Target SHA"
   tags:
     description: "Parsed Tags"
 
