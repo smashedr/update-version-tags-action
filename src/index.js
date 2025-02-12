@@ -112,7 +112,7 @@ const Tags = require('./tags')
                 core.info(`\u001b[33mCreating new tag "${tag}" to sha: ${sha}`)
                 await tags.createRef(tag, sha)
             }
-            results.push(`**${tag}**`)
+            results.push(`<strong>${tag}</strong>`)
         }
 
         // Set Output
@@ -123,8 +123,14 @@ const Tags = require('./tags')
         if (summary) {
             console.log('results:', results)
             core.summary.addHeading('Update Version Tags', '1')
-            core.summary.addRaw(`**${tag}** \`${sha}\``, true)
+            core.summary.addRaw(
+                `<strong>${tag}</strong> <code>${sha}</code>`,
+                true
+            )
             core.summary.addList(results)
+            core.summary.addRaw(
+                '<a href="https://github.com/cssnr/update-version-tags-action/issues">Report issues or request features.</a>'
+            )
             await core.summary.write()
         }
 
