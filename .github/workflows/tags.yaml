@@ -34,7 +34,7 @@ jobs:
 
     steps:
       - name: "Update Tags"
-        uses: cssnr/update-version-tags-action@v1
+        uses: smashedr/update-version-tags-action@master
         with:
           target: ${{ inputs.target }}
           tags: ${{ inputs.tags }}
