@@ -33,7 +33,7 @@ jobs:
       - name: "Update Tags"
         uses: smashedr/update-version-tags-action@master
         with:
-          target: "v1.0.4"
+          target: ${{ inputs.target }}
           tags: ${{ inputs.tags }}
           major: "${{ inputs.major != '' && inputs.major || true }}"
           minor: "${{ inputs.minor != '' && inputs.minor || true }}"
