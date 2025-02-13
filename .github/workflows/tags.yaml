@@ -27,7 +27,8 @@ jobs:
     name: "Tags"
     runs-on: ubuntu-latest
     timeout-minutes: 5
-    permissions: write-all
+    permissions:
+      packages: write
 
     steps:
       - name: "Update Tags"
