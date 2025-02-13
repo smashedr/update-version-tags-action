@@ -32488,6 +32488,7 @@ class Tags {
     }
 
     async getRef(tag) {
+        console.log(`getRef: ref: tags/${tag}`)
         try {
             return await this.octokit.rest.git.getRef({
                 owner: this.owner,
@@ -32503,6 +32504,8 @@ class Tags {
     }
 
     async createRef(tag, sha) {
+        console.log(`createRef: ref: refs/tags/${tag}`)
+        console.log('sha:', sha)
         return await this.octokit.rest.git.createRef({
             owner: this.owner,
             repo: this.repo,
@@ -32512,7 +32515,8 @@ class Tags {
     }
 
     async updateRef(tag, sha, force = false) {
-        console.log('force:', force)
+        console.log(`updateRef: ref: tags/${tag}`)
+        console.log('sha:', sha, force)
         await this.octokit.rest.git.updateRef({
             owner: this.owner,
             repo: this.repo,
