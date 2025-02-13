@@ -32,6 +32,7 @@ class Tags {
     }
 
     async updateRef(tag, sha, force = false) {
+        console.log('force:', force)
         await this.octokit.rest.git.updateRef({
             owner: this.owner,
             repo: this.repo,
