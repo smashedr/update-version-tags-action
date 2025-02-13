@@ -12,16 +12,14 @@ on:
       tags:
         description: "Extra Tags"
         type: string
-        required: true
+        required: false
       major:
         description: "Parse Major"
         type: boolean
-        required: true
         default: true
       minor:
         description: "Parse Minor"
         type: boolean
-        required: true
         default: true
 
 jobs:
