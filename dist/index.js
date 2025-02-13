@@ -36335,9 +36335,8 @@ const Tags = __nccwpck_require__(800)
                 core.info(`\u001b[33mCreating new tag "${tag}" to sha: ${sha}`)
                 await tags.createRef(tag, sha)
             }
-            const i = reference ? ':white_check_mark:' : ':new:'
             results.push(
-                `${i} <strong>${tag}</strong> <a href="https://github.com/${owner}/${repo}/releases/tag/v1" target="_blank">view tag</a>`
+                `${reference ? ':white_check_mark:' : ':new:'} <strong>${tag}</strong> <small><a href="https://github.com/${owner}/${repo}/releases/tag/v1">view tag</a></small>`
             )
         }
 
@@ -36355,7 +36354,7 @@ const Tags = __nccwpck_require__(800)
             )
             core.summary.addList(results)
             core.summary.addRaw(
-                '<a href="https://github.com/cssnr/update-version-tags-action/issues" target="_blank">Report an issues or request a feature</a>'
+                '<a href="https://github.com/cssnr/update-version-tags-action/issues">Report an issues or request a feature</a>'
             )
             await core.summary.write()
         }
