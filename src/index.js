@@ -102,7 +102,7 @@ const Tags = require('./tags')
             if (reference) {
                 if (sha !== reference.data.object.sha) {
                     core.info(`\u001b[32mUpdating tag "${tag}" to sha: ${sha}`)
-                    await tags.updateRef(tag, sha)
+                    await tags.updateRef(tag, sha, !!target)
                 } else {
                     core.info(
                         `\u001b[36mTag "${tag}" already points to sha: ${sha}`

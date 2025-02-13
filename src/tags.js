@@ -31,12 +31,13 @@ class Tags {
         })
     }
 
-    async updateRef(tag, sha) {
+    async updateRef(tag, sha, force = false) {
         await this.octokit.rest.git.updateRef({
             owner: this.owner,
             repo: this.repo,
             ref: `tags/${tag}`,
             sha,
+            force,
         })
     }
 }

@@ -32511,12 +32511,13 @@ class Tags {
         })
     }
 
-    async updateRef(tag, sha) {
+    async updateRef(tag, sha, force = false) {
         await this.octokit.rest.git.updateRef({
             owner: this.owner,
             repo: this.repo,
             ref: `tags/${tag}`,
             sha,
+            force,
         })
     }
 }
@@ -36325,7 +36326,7 @@ const Tags = __nccwpck_require__(800)
             if (reference) {
                 if (sha !== reference.data.object.sha) {
                     core.info(`\u001b[32mUpdating tag "${tag}" to sha: ${sha}`)
-                    await tags.updateRef(tag, sha)
+                    await tags.updateRef(tag, sha, !!target)
                 } else {
                     core.info(
                         `\u001b[36mTag "${tag}" already points to sha: ${sha}`
