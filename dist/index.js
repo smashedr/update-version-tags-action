@@ -36250,7 +36250,7 @@ const Tags = __nccwpck_require__(800)
         const summary = core.getBooleanInput('summary')
         console.log('summary:', summary)
         const token = core.getInput('token', { required: true })
-        // console.log('token:', token)
+        console.log(`token: "${token}"`)
 
         // Check Tag
         let tag
