@@ -36496,7 +36496,7 @@ async function main() /* NOSONAR */ {
  * @param {string[]} allTags
  * @param {string} sha
  * @param {Inputs} inputs
- * @return {object}
+ * @return {Promise<object>}
  */
 async function processTags(tags, allTags, sha, inputs) {
   const results = {};
