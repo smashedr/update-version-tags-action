@@ -82,7 +82,7 @@ jobs:
 
       - name: "Update Version Tags"
         id: tags
-        uses: smashedr/update-version-tags-action@fork # TODO: Update After Release
+        uses: smashedr/update-version-tags-action@updates # TODO: Update After Release
         with:
           ref: refs/heads/${{ env.release }}
           tag: ${{ env.tag }}
