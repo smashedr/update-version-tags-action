@@ -20,10 +20,17 @@ inputs:
     default: "false"
   tags:
     description: "Extra Tags"
+  sha:
+    description: "Override Target Sha"
+  ref:
+    description: "Resolve Git Ref to Sha"
   tag:
     description: "Target Tag"
   create:
     description: "Create Target Tag"
+    default: "false"
+  force:
+    description: "Force Update Ref"
     default: "false"
   summary:
     description: "Add Summary to Job"

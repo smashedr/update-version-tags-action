@@ -51,6 +51,10 @@ Make sure to review the [Inputs](#inputs) and checkout more [Examples](#examples
 > Please submit a [Feature Request](https://github.com/cssnr/update-version-tags-action/discussions/categories/feature-requests)
 > for new features or [Open an Issue](https://github.com/cssnr/update-version-tags-action/issues) if you find any bugs.
 
+> [!WARNING]  
+> This action no longer works on the `master` branch.  
+> If you need a rolling tag use the [@release](https://github.com/cssnr/update-version-tags-action/tree/release) branch.
+
 ## Inputs
 
 | Input                | Default&nbsp;Value | Description&nbsp;of&nbsp;Input&nbsp;Value            |
@@ -60,8 +64,11 @@ Make sure to review the [Inputs](#inputs) and checkout more [Examples](#examples
 | [minor](#majorminor) | `true`             | Update Minor Tag `vN.N`                              |
 | [release](#release)  | `false`            | Update Release Tag `vN.N.N`                          |
 | [tags](#tags)        | -                  | Additional Tags to Update                            |
+| [sha](#sha)          | -                  | Override Target Sha                                  |
+| [ref](#ref)          | -                  | Resolve Git Ref to Sha                               |
 | [tag](#tag)          | `github.ref_name`  | Manually Set Target Tag                              |
 | [create](#create)    | `false`            | Create Target [tag](#tag)                            |
+| [force](#force)      | `false`            | Force Update Ref                                     |
 | [summary](#summary)  | `true`             | Add Summary to Job                                   |
 | [dry_run](#dry_run)  | `false`            | Will not Create/Update Tags, [Output](#outputs) Only |
 | [token](#token)      | `github.token`     | For use with a PAT to Rollback                       |
@@ -135,6 +142,19 @@ To **only** set these `tags` set both [major](#majorminor) and [minor](#majormin
 
 Note the [prefix](#prefix) is not applied to these tags...
 
+#### sha
+
+Override the target sha. If not provided, defaults to the `sha` that triggered the workflow.
+
+This is useful if you want to manually specify a sha to point tags to.
+
+#### ref
+
+Resolve an arbitrary git ref to a sha and use it as the target. Overrides both `sha` and `tag`.
+
+Accepts any ref such as `heads/main`, `tags/v1`, `refs/heads/release`, or `refs/tags/v1.0.0`.
+This is useful for pointing tags to the latest commit on a branch rather than looking up a tag.
+
 #### tag
 
 This is the target tag to parse the `sha` from. Defaults to the `sha` that triggered the workflow.
@@ -149,6 +169,12 @@ Default: `${{ github.ref_name }}`
 #### create
 
 If `true` this will create the [tag](#tag) at the current `sha` of the workflow run.
+
+Default: `false`
+
+#### force
+
+If `true`, will force the update of the ref. This is useful for non-fast-forward updates.
 
 Default: `false`
 
