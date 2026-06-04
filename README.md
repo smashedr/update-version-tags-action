@@ -61,6 +61,7 @@ Make sure to review the [Inputs](#inputs) and checkout more [Examples](#examples
 | [release](#release)  | `false`            | Update Release Tag `vN.N.N`                          |
 | [tags](#tags)        | -                  | Additional Tags to Update                            |
 | [sha](#sha)          | -                  | Override Target Sha                                  |
+| [ref](#ref)          | -                  | Resolve Git Ref to Sha                               |
 | [tag](#tag)          | `github.ref_name`  | Manually Set Target Tag                              |
 | [create](#create)    | `false`            | Create Target [tag](#tag)                            |
 | [force](#force)      | `false`            | Force Update Ref                                     |
@@ -142,6 +143,13 @@ Note the [prefix](#prefix) is not applied to these tags...
 Override the target sha. If not provided, defaults to the `sha` that triggered the workflow.
 
 This is useful if you want to manually specify a sha to point tags to.
+
+#### ref
+
+Resolve an arbitrary git ref to a sha and use it as the target. Overrides both `sha` and `tag`.
+
+Accepts any ref such as `heads/main`, `tags/v1`, `refs/heads/release`, or `refs/tags/v1.0.0`.
+This is useful for pointing tags to the latest commit on a branch rather than looking up a tag.
 
 #### tag
 

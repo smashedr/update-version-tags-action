@@ -34,6 +34,27 @@ class Tags {
   }
 
   /**
+   * Resolve any git ref to a ref object
+   * @param {string} ref
+   * @return {Promise<object|null>}
+   */
+  async resolveRef(ref) {
+    try {
+      // noinspection JSUnresolvedReference
+      return await this.octokit.rest.git.getRef({
+        owner: this.owner,
+        repo: this.repo,
+        ref: ref.replace(/^refs\//, ''),
+      })
+    } catch (e) {
+      if (e.status === 404) {
+        return null
+      }
+      throw e
+    }
+  }
+
+  /**
    * Create tag to sha
    * @param {string} tag
    * @param {string} sha

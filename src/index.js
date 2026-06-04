@@ -30,7 +30,14 @@ async function main() /* NOSONAR */ {
 
   // Set Sha - target sha for allTags
   let sha = inputs.sha || github.context.sha
-  if (inputs.tag) {
+  if (inputs.ref) {
+    core.info(`Resolving ref: \u001b[33m${inputs.ref}`)
+    const resolved = await tags.resolveRef(inputs.ref)
+    if (!resolved) {
+      return core.setFailed(`Ref not found: ${inputs.ref}`)
+    }
+    sha = resolved.data.object.sha
+  } else if (inputs.tag) {
     core.info(`Getting sha for ref: \u001b[33m${inputs.tag}`)
     const ref = await tags.getRef(inputs.tag)
     // console.log('ref:', ref)
@@ -243,6 +250,7 @@ async function addSummary(inputs, tag, sha, results, parsed, allTags) {
  * @property {boolean} release
  * @property {string} tags
  * @property {string} sha
+ * @property {string} ref
  * @property {string} tag
  * @property {boolean} create
  * @property {boolean} force
@@ -259,6 +267,7 @@ function getInputs() {
     release: core.getBooleanInput('release'),
     tags: core.getInput('tags'),
     sha: core.getInput('sha'),
+    ref: core.getInput('ref'),
     tag: core.getInput('tag'),
     create: core.getBooleanInput('create'),
     force: core.getBooleanInput('force'),

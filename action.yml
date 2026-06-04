@@ -22,6 +22,8 @@ inputs:
     description: "Extra Tags"
   sha:
     description: "Override Target Sha"
+  ref:
+    description: "Resolve Git Ref to Sha"
   tag:
     description: "Target Tag"
   create:

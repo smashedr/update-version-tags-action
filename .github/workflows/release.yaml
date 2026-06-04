@@ -80,20 +80,15 @@ jobs:
           app_id: ${{ vars.APP_CLIENT_ID }}
           app_private_key: ${{ secrets.APP_PRIVATE_KEY }}
 
-      - name: "Update Release Tag"
-        working-directory: ${{ env.release }}
-        run: |
-          pwd
-          git fetch origin "${{ env.release }}"
-          git tag -f "${{ env.tag }}" "origin/${{ env.release }}"
-          git push origin "${{ env.tag }}" -f
-
       - name: "Update Version Tags"
         id: tags
-        uses: cssnr/update-version-tags-action@v2
+        uses: smashedr/update-version-tags-action@fork # TODO: Update After Release
         with:
+          ref: refs/heads/${{ env.release }}
           tag: ${{ env.tag }}
           tags: "latest"
+          force: true
+          release: true
 
       - name: "Update Release Notes"
         continue-on-error: true

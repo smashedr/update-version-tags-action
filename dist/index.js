@@ -36303,6 +36303,27 @@ class Tags {
   }
 
   /**
+   * Resolve any git ref to a ref object
+   * @param {string} ref
+   * @return {Promise<object|null>}
+   */
+  async resolveRef(ref) {
+    try {
+      // noinspection JSUnresolvedReference
+      return await this.octokit.rest.git.getRef({
+        owner: this.owner,
+        repo: this.repo,
+        ref: ref.replace(/^refs\//, ''),
+      })
+    } catch (e) {
+      if (e.status === 404) {
+        return null
+      }
+      throw e
+    }
+  }
+
+  /**
    * Create tag to sha
    * @param {string} tag
    * @param {string} sha
@@ -36364,7 +36385,14 @@ async function main() /* NOSONAR */ {
 
   // Set Sha - target sha for allTags
   let sha = inputs.sha || context.sha;
-  if (inputs.tag) {
+  if (inputs.ref) {
+    info(`Resolving ref: \u001b[33m${inputs.ref}`);
+    const resolved = await tags.resolveRef(inputs.ref);
+    if (!resolved) {
+      return setFailed(`Ref not found: ${inputs.ref}`)
+    }
+    sha = resolved.data.object.sha;
+  } else if (inputs.tag) {
     info(`Getting sha for ref: \u001b[33m${inputs.tag}`);
     const ref = await tags.getRef(inputs.tag);
     // console.log('ref:', ref)
@@ -36577,6 +36605,7 @@ async function addSummary(inputs, tag, sha, results, parsed, allTags) {
  * @property {boolean} release
  * @property {string} tags
  * @property {string} sha
+ * @property {string} ref
  * @property {string} tag
  * @property {boolean} create
  * @property {boolean} force
@@ -36593,6 +36622,7 @@ function getInputs() {
     release: getBooleanInput('release'),
     tags: getInput('tags'),
     sha: getInput('sha'),
+    ref: getInput('ref'),
     tag: getInput('tag'),
     create: getBooleanInput('create'),
     force: getBooleanInput('force'),
