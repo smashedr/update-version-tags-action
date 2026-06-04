@@ -36288,6 +36288,7 @@ class Tags {
    */
   async getRef(tag) {
     try {
+      // noinspection JSUnresolvedReference
       return await this.octokit.rest.git.getRef({
         owner: this.owner,
         repo: this.repo,
@@ -36308,6 +36309,7 @@ class Tags {
    * @return {Promise<object>}
    */
   async createRef(tag, sha) {
+    // noinspection JSUnresolvedReference
     return await this.octokit.rest.git.createRef({
       owner: this.owner,
       repo: this.repo,
@@ -36324,6 +36326,7 @@ class Tags {
    * @return {Promise<object>}
    */
   async updateRef(tag, sha, force) {
+    // noinspection JSUnresolvedReference
     await this.octokit.rest.git.updateRef({
       owner: this.owner,
       repo: this.repo,
