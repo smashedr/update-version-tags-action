@@ -60,8 +60,10 @@ Make sure to review the [Inputs](#inputs) and checkout more [Examples](#examples
 | [minor](#majorminor) | `true`             | Update Minor Tag `vN.N`                              |
 | [release](#release)  | `false`            | Update Release Tag `vN.N.N`                          |
 | [tags](#tags)        | -                  | Additional Tags to Update                            |
+| [sha](#sha)          | -                  | Override Target Sha                                  |
 | [tag](#tag)          | `github.ref_name`  | Manually Set Target Tag                              |
 | [create](#create)    | `false`            | Create Target [tag](#tag)                            |
+| [force](#force)      | `false`            | Force Update Ref                                     |
 | [summary](#summary)  | `true`             | Add Summary to Job                                   |
 | [dry_run](#dry_run)  | `false`            | Will not Create/Update Tags, [Output](#outputs) Only |
 | [token](#token)      | `github.token`     | For use with a PAT to Rollback                       |
@@ -135,6 +137,12 @@ To **only** set these `tags` set both [major](#majorminor) and [minor](#majormin
 
 Note the [prefix](#prefix) is not applied to these tags...
 
+#### sha
+
+Override the target sha. If not provided, defaults to the `sha` that triggered the workflow.
+
+This is useful if you want to manually specify a sha to point tags to.
+
 #### tag
 
 This is the target tag to parse the `sha` from. Defaults to the `sha` that triggered the workflow.
@@ -149,6 +157,12 @@ Default: `${{ github.ref_name }}`
 #### create
 
 If `true` this will create the [tag](#tag) at the current `sha` of the workflow run.
+
+Default: `false`
+
+#### force
+
+If `true`, will force the update of the ref. This is useful for non-fast-forward updates.
 
 Default: `false`
 
