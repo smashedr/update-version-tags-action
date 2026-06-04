@@ -28,7 +28,7 @@ class Tags {
       if (e.status === 404) {
         return null
       }
-      throw new Error(e)
+      throw e
     }
   }
 

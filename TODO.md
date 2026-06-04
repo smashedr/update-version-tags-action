@@ -14,9 +14,7 @@ To view the documentation, visit: [https://github.com/cssnr/update-version-tags-
 
 # TODO
 
-- Delete [commit-checklist.json](commit-checklist.json)
-- Delete [dist](dist)
-- Delete [TODO.md](TODO.md)
+- Confirm [jsconfig.json](jsconfig.json) is useful...
 
 ```shell
 git clone ...
