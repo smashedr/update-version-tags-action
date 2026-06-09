@@ -18,6 +18,8 @@ inputs:
   release:
     description: "Update Release Tag"
     default: "false"
+  branch_prefix:
+    description: "Prefix for auto-generated version tags (e.g., 'release' creates 'release/v1')"
   tags:
     description: "Extra Tags"
   sha:

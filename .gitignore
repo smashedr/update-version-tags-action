@@ -3,7 +3,7 @@
 *.iml
 .vscode/
 cache/
-dist/
+#dist/
 build/
 node_modules/
 eslint_report.json

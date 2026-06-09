@@ -63,6 +63,7 @@ jobs:
           npm ci
 
       - name: "Debug"
+        if: ${{ !github.event.act }}
         continue-on-error: true
         run: |
           ls -lah .

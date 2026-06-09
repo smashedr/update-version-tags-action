@@ -88,6 +88,7 @@ jobs:
           tags: "latest"
           force: true
           release: true
+          #branch_prefix: ${{ env.release }}
 
       - name: "Update Release Notes"
         continue-on-error: true
@@ -96,6 +97,7 @@ jobs:
           location: "tail"
           actions: |
             tags: ${{ steps.tags.outputs.tags }}
+            sha: ${{ steps.tags.outputs.sha }}
 
       - name: "Package Changelog"
         continue-on-error: true

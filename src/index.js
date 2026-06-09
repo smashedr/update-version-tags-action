@@ -68,6 +68,10 @@ async function main() /* NOSONAR */ {
     }
   }
 
+  // cleanup this
+  const branchPrefix = inputs.branch_prefix ? `${inputs.branch_prefix}/` : ''
+  console.log('branchPrefix:', branchPrefix)
+
   // Collect Tags - allTags
   core.startGroup('Processing Tags')
   const collectedTags = []
@@ -80,17 +84,17 @@ async function main() /* NOSONAR */ {
     collectedTags.push(...parsedTags)
   }
   if (inputs.major) {
-    const current = `${inputs.prefix}${parsed.major}`
+    const current = `${branchPrefix}${inputs.prefix}${parsed.major}`
     console.log(`Major Tag: ${current}`)
     collectedTags.push(current)
   }
   if (inputs.minor) {
-    const current = `${inputs.prefix}${parsed.major}.${parsed.minor}`
+    const current = `${branchPrefix}${inputs.prefix}${parsed.major}.${parsed.minor}`
     console.log(`Minor Tag: ${current}`)
     collectedTags.push(current)
   }
   if (inputs.release) {
-    const current = `${inputs.prefix}${parsed.major}.${parsed.minor}.${parsed.patch}`
+    const current = `${branchPrefix}${inputs.prefix}${parsed.major}.${parsed.minor}.${parsed.patch}`
     console.log(`Release Tag: ${current}`)
     collectedTags.push(current)
   }
@@ -249,6 +253,7 @@ async function addSummary(inputs, tag, sha, results, parsed, allTags) {
  * @property {boolean} major
  * @property {boolean} minor
  * @property {boolean} release
+ * @property {string} branch_prefix
  * @property {string} tags
  * @property {string} sha
  * @property {string} ref
@@ -266,6 +271,7 @@ function getInputs() {
     major: core.getBooleanInput('major'),
     minor: core.getBooleanInput('minor'),
     release: core.getBooleanInput('release'),
+    branch_prefix: core.getInput('branch_prefix'),
     tags: core.getInput('tags'),
     sha: core.getInput('sha'),
     ref: core.getInput('ref'),
